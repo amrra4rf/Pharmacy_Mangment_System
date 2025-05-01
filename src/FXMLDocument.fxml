@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="projectpharmacy.FXMLDocumentController">
+    <children>
+      <Button layoutX="135.0" layoutY="88.0" mnemonicParsing="false" text="Doctor" />
+      <Button layoutX="134.0" layoutY="125.0" mnemonicParsing="false" text="Employee" />
+      <Button layoutX="135.0" layoutY="161.0" mnemonicParsing="false" text="Customer" />
+      <TextField floatText="I am a" layoutX="87.0" layoutY="47.0" />
+    </children>
+</AnchorPane>

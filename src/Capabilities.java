@@ -1,3 +1,4 @@
+package projectpharmacy;
 public interface Capabilities
 {
     void add_item(Item i);
