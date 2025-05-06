@@ -1,7 +1,13 @@
 {
-    "java.project.referencedLibraries": [],
+    "java.project.referencedLibraries": [
+      "Lib\\hamcrest-core-1.3.jar",
+      "Lib\\junit-4.13.2.jar",
+      "Lib\\junit-platform-console-standalone-1.13.0-M3.jar",
+      "f:\\college\\Github\\Pharmacy_Mangment_System\\test-lib\\junit-platform-console-standalone-1.13.0-M3.jar"
+    ],
     "java.project.sourcePaths": [
-      "Lib"
+      "src\\test\\java\\main"
     ]
+    
   }
   
