@@ -1,10 +1,9 @@
 package main;
-public class Main
-{
-    public static void main(String []args)
-    {
-        Pharmacy phar=Pharmacy.getInstance();
+
+public class Main {
+    public static void main(String[] args) {
+        Pharmacy phar = Pharmacy.getInstance();
         phar.menu();
-   
+
     }
 }

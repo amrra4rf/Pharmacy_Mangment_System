@@ -1,16 +1,9 @@
-make remove function which shifts the array to remove the removed item
-Employee class
-thing to be sorted (items ) according to price and name
-in the remove function if the amount to be removed is = to the avilable amount remove the item from the array +print item removed sucessfully
+
 Check all Exception Handlings 
 
-*********continue making the login and sign up functions in the pharamacy class
+when amking an order and there is no item with name display no item
 
-make the password field in the person class
-add display items for the customer
-
-
-
+increase balance 
 
  // Create an instance of the Pharmacy
        Pharmacy pharmacy = Pharmacy.getInstance();
