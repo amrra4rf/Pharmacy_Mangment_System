@@ -1,5 +1,6 @@
 package main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Customer extends Person {
@@ -36,7 +37,8 @@ public class Customer extends Person {
         System.out.println("-----------------------------------------------");
     }
 
-    public void make_order(String name, int amount_needed) throws IllegalArgumentException {
+    public void make_order(String order_owner, String name, int amount_needed) throws IllegalArgumentException {
+        boolean found = false;
         System.out.println("-----------------------------------------------");
         for (int index = 0; index < Pharmacy.item_count_in_pharmacy; index++) {
             if (p.items[index].get_name().equals(name))// item found
@@ -46,52 +48,89 @@ public class Customer extends Person {
                         System.out.println("Insfuccient Funds to Complete Process");
                     } else {
                         // order place and items count decreased
+                        found = true;
                         p.items[index].set_subtract_count(amount_needed);
-                        ;
-                        p.place_order(index, amount_needed);
+
+                        p.place_order(order_owner, index, amount_needed);
                         Balance -= p.items[index].get_price() * amount_needed;
                     }
                 } else {
                     System.out.println("Insuffcient Amount Of This Item, There are only " + p.items[index].get_count() +
-                            " Of It Left, So Please Ask for Diffrent Amount If >=0 you will exit");
-                    int amount = s.nextInt();
-
-                    if (amount > 0) {
-                        make_order(name, amount);
+                            " Of It Left, So Please Ask for Diffrent Amount If ->=0 you will exit");
+                    int amount = 0;
+                    while (true) {
+                        try {
+                            amount = s.nextInt();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Please enter an integer input of amount needed");
+                            s.nextLine();
+                        }
                     }
 
+                    while (true) {
+                        if (amount > 0) {
+                            make_order(order_owner, name, amount);
+                            break;
+                        } else if (amount >= 0) {
+
+                            System.out.println("Invalid input must be greater than 0");
+                            amount = s.nextInt();
+                            s.nextLine();
+                        }
+
+                    }
                 }
                 System.out.println("-----------------------------------------------");
                 return;
-            } else {
-                System.out.println("No Such Item Found");
-                System.out.println("-----------------------------------------------");
             }
         }
-
+        if (!found) {
+            System.out.println("No Such Item Found");
+            System.out.println("-----------------------------------------------");
+        }
     }
 
     public void main_menu() {
-        while (true) 
-        {
+        while (true) {
             System.out.println("-----------------------------------------------");
             System.out.println("Hello Mr/ " + this.get_name() + "  please choose a number from below");
             System.out.println("1)Display Self Data");
             System.out.println("2)Make An Order");
             System.out.println("3)Track An Order");
             System.out.println("4)Display All Items");
-            System.out.println("5)Logout");
+            System.out.println("5)Display My orders");
+
+            System.out.println("6)Logout");
             System.out.println("-----------------------------------------------");
-            int Decsion = s.nextInt();
+            int Decsion = 0;
+            while (true) {
+                try {
+                    Decsion = s.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter an integer input");
+                    s.nextLine();
+                }
+            }
             if (Decsion == 1) {
                 this.display_self();
             } else if (Decsion == 2) {
                 System.out.println("Please enter the name of the order and the amount needed");
                 s.nextLine();
                 String temp_name = s.nextLine();
-                int temp_amount_needed = s.nextInt();
+                int temp_amount_needed = 0;
+                while (true) {
+                    try {
+                        temp_amount_needed = s.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Please enter an Integer value for");
+                        s.nextLine();
+                    }
+                }
                 System.out.println("-----------------------------------------------");
-                this.make_order(temp_name, temp_amount_needed);
+                this.make_order(get_name(), temp_name, temp_amount_needed);
             }
 
             // tracking order
@@ -118,6 +157,36 @@ public class Customer extends Person {
                     }
                 }
             } else if (Decsion == 5) {
+                for (int i = 0; i < Pharmacy.orders_count_in_pharamcy; i++) {
+                    if (p.orders[i].get_order_owner().equals(this.get_name())) {
+                        p.orders[i].display_order_info();
+                    }
+                }
+            } else if (Decsion == 6) {
+                {
+                    while (true) {
+                        System.out.println("Please enter a number to add to your balance ");
+                        double number = 0;
+                        while (true) {
+                            try {
+                                number = s.nextDouble();
+                                break;
+                            } catch (InputMismatchException e) {
+                                System.out.println("Please enter a Double value ");
+                                s.nextLine();
+                            }
+
+                        }
+                        if (number > 0) {
+                            Balance += number;
+                            break;
+                        } else {
+                            System.out.println("Invalid input you can't add negative value to the balanace");
+                        }
+                    }
+                }
+
+            } else if (Decsion == 7) {
                 break;
             }
         }

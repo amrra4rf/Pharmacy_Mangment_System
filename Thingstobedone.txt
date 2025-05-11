@@ -1,7 +1,7 @@
 
-Check all Exception Handlings 
 
-when amking an order and there is no item with name display no item
 
-increase balance 
 
+find persons by name deals with customer
+find_item_by_name RETURN NULL DEAL WITH IT IN THE CALLER+ASK CHAT IF THIS EVEN THROWS OR NOT
+same for find_item_by_id

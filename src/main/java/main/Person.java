@@ -6,7 +6,7 @@ public abstract class Person {
     Pharmacy p;//doesn't need to be private since there is only 1 pharmacy and it can get acessed easily form the pharamacy class
 
     abstract void display_self();
-
+    abstract boolean check_pass(String password);
     Person(String name, int age) 
     {
         this.name = name;

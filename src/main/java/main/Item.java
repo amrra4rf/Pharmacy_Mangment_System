@@ -47,13 +47,7 @@ public class Item implements Comparable<Item> {
     //end of getters 
 
         //start of setters
-            public void set_count(int temp_count) throws IllegalArgumentException
-            {
-                if(temp_count<0) throw new IllegalArgumentException();
-                else{
-                    count=temp_count;
-                }
-            }
+          
             public void set_subtract_count(int temp_count)
             {
                 count-=temp_count;
@@ -62,7 +56,11 @@ public class Item implements Comparable<Item> {
             {
                 count+=temp_count;
             }
-        //
+            public void set_id(String id)
+            {
+                this.id=id;
+            }
+        //end of setters
 
 
 

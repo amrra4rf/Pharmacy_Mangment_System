@@ -233,9 +233,9 @@ public class Pharmacy {
         }
     }
 
-    public void place_order(int index, int amount_needed) {
+    public void place_order(String order_owner ,int index, int amount_needed) {
 
-        orders[orders_count_in_pharamcy] = new Order(items[index], amount_needed, LocalDate.now());
+        orders[orders_count_in_pharamcy] = new Order(order_owner,items[index], amount_needed, LocalDate.now());
         System.out.println("Order Placed Sucessfully and the Order Number is :"
                 + orders[orders_count_in_pharamcy].get_order_number());
         orders_count_in_pharamcy++;
