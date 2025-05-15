@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "java",
+        "name": "test",
+        "request": "launch",
+        "mainClass": "test",
+        "projectName": "doodle_e75c1b4c"
+    },
+    {
+        "type": "java",
+        "name": "Launch JavaFX App",
+        "request": "launch",
+        "mainClass": "Main",
+        "cwd": "${workspaceFolder}",
+        "console": "externalTerminal",
+        "vmArgs": "--module-path \"f:/college/fx/javafx-sdk-24.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+    }
+]
+}

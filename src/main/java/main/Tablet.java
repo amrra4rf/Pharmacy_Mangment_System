@@ -1,6 +1,8 @@
 package main;
-
 import java.time.LocalDate;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
 
 public class Tablet extends Item {
    private  int number_of_capsules;
@@ -21,16 +23,17 @@ public class Tablet extends Item {
     @Override
     public void Displayinfo()
     {
-        System.out.println("-----------------------------------------------");
-
-        System.out.println("Item name :" + this.get_name());
-        System.out.println("Item ID:" + this.get_id());
-        System.out.println("Item count:" + this.get_count());
-        System.out.println("Price:" + this.get_price() + "$");
-        System.out.println("Expiry Date:" + get_expiry_date().toString());
-        System.out.println("Volume :"+number_of_capsules);
-
-        System.out.println("-----------------------------------------------");
+      
+        ab.appendText("------------------------------------------------------\n");
+        ab.appendText("Item name :" + this.get_name()+"\n");
+        ab.appendText("Item ID:" + this.get_id()+"\n");
+        ab.appendText("Item count:" + this.get_count()+"\n");
+        ab.appendText("Price:" + this.get_price() + "$\n");
+        ab.appendText("Expiry Date:" + get_expiry_date().toString()+"\n");
+        ab.appendText("Item number of capsules:" + number_of_capsules+"\n");
+        ab.appendText("------------------------------------------------------");
+        
+        
     }
 
 

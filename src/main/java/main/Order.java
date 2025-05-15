@@ -1,7 +1,8 @@
-package main;
 
+package main;
 import java.time.LocalDate;
 import java.util.Random;
+import javafx.scene.control.TextArea;
 
 public class Order 
 {
@@ -51,19 +52,29 @@ public class Order
   }
 
   //end of getters
+  public static TextArea t = new TextArea();
+  
   public void display_order_info()
   {
-    System.out.println("Order Owner:"+get_order_owner());
-    System.out.println("Item Name :"+o.get_name());
-    System.out.println( "Item Id:"+o.get_id());
-    System.out.println("Order Number "+order_number);
-    System.out.println("Amount ordered"+amount_ordered);
-    System.out.println("Order Date "+order_date);
-    if(order_shipped) System.out.println("Order Status:Shipped ");
-    else System.out.println("Order Status:Not Shipped Yet ");
-    System.out.println("-------------------------------------");
+    
+   
+    t.appendText("Order Owner:"+get_order_owner()+"\n");
+    t.appendText("Item Name :"+o.get_name()+"\n");
+    t.appendText("Item Id:"+o.get_id()+"\n");
+    t.appendText("Order Number "+order_number+"\n");
+     t.appendText("Amount ordered"+amount_ordered+"\n");
+    t.appendText("Order Date "+order_date+"\n");
+    t.appendText("Order Number "+order_number+"\n");
+    if(order_shipped) {
+    t.appendText("Order statues: Shipped\n");
+    }
+    else {
+        
+        t.appendText("Order status:Not shipped\n");
   }
-
+    t.appendText("---------------------------------------------------\n");
+  
+  }
 
   public void ship_order()
   {

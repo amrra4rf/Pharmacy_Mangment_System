@@ -12,7 +12,7 @@ public interface Capabilities {
 
     public void remove_item(Item removed_item, int count_to_be_removed);
 
-    public void remove_item_by_name(String name, int count_to_be_removed) throws NameNotFoundException;// done
+    public void remove_item_by_name(String name, int count_to_be_removed) throws removeException; // done
 
     public void remove_item_by_id(String id, int count_to_be_removed);// done+This throws a custom exception called
                                                                       // IdNotFoundException which will be added later
@@ -23,9 +23,28 @@ public interface Capabilities {
 
     public void increase_amount_of_item_by_id(String id, int amount_to_be_added);// done
 
-    public void ship_item();// done
+    public void ship_item() throws noItemsToShip;
+// done
+    
+    public class itemNotFoundException extends Exception{
+       public itemNotFoundException(String message){
+           super(message);
+       }
+   }
+    public class removeException extends Exception{
+        public removeException (String message){
+                super(message);
+        }
+    
+    }
+    public class noItemsToShip extends Exception{
+        noItemsToShip(String message){
+            super(message);
+        }
+    
+    }
 
-    public Item find_item_by_name(String name);// done
+    public Item find_item_by_name(String name) throws itemNotFoundException;// done
 
     public Item find_item_by_id(String id); // done
 }

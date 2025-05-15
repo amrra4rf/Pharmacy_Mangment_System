@@ -1,6 +1,9 @@
-package main;
 
+package main;
 import java.time.LocalDate;
+import javafx.scene.control.TextArea;
+
+
 
 public class Item implements Comparable<Item> {
     private String name;
@@ -9,6 +12,8 @@ public class Item implements Comparable<Item> {
     private LocalDate expiry;
     private static int items_count = 0;
     private double price;
+    public static TextArea ab = new TextArea();
+    //public static TextArea aa = new TextArea();
 
     Item(String name, int count, LocalDate expiry, double price) {
         this.expiry = expiry;
@@ -78,7 +83,8 @@ public class Item implements Comparable<Item> {
     public int compareTo(Item it) {
         return Double.compare(this.price, it.price);
     }
-
+   
+  
     public void Displayinfo() {
         System.out.println("-----------------------------------------------");
 
@@ -89,6 +95,21 @@ public class Item implements Comparable<Item> {
         System.out.println("Expiry Date:" + expiry.toString());
 
         System.out.println("-----------------------------------------------");
+        
+        ab.appendText("------------------------------------------------------\n");
+        ab.appendText("Item name :" + this.name+"\n");
+        ab.appendText("Item ID:" + this.id+"\n");
+        ab.appendText("Item count:" + this.count+"\n");
+        ab.appendText("Price:" + this.price + "$\n");
+        ab.appendText("Expiry Date:" + expiry.toString()+"\n");
+        ab.appendText("------------------------------------------------------");
+
     }
+   
+
+    
+    
+    
+    
 
 }

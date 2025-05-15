@@ -1,9 +1,11 @@
 package main;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+
 
 public class Doctor extends Person implements Capabilities {
     private String password;
@@ -11,6 +13,8 @@ public class Doctor extends Person implements Capabilities {
     private String id;
     public static int count_of_doctors = 0;
     private double salary;
+   
+    
 
     Doctor(String name, int age, double salary, String password) {
         super(name, age);// pass the name and age to the person class to intialize them
@@ -19,50 +23,75 @@ public class Doctor extends Person implements Capabilities {
         this.password = password;
         s = new Scanner(System.in);
     }
+     
 
     // geters
     public String get_id() {
         return id;
     }
+   
     // end of getters
 
     // checks if the password given is the doctor's pass
     public boolean check_pass(String p) {
         return password.equals(p);
     }
-
-    void display_self() {
+//public static TextArea l = new TextArea();
+   void display_self() {
         System.out.println("-----------------------------------------------");
         System.out.println("Name: Dr/" + this.get_name());
         System.out.println("Id:" + this.id);
         System.out.println("Age:" + this.get_age());
         System.out.println("Salary:" + this.salary + "$");
         System.out.println("-----------------------------------------------");
+        /* 
+        //TextArea l = new TextArea();
+        l.setEditable(false);
+        l.appendText("-----------------------------------------------\n");
+        l.appendText("Name: Dr/" + this.get_name()+"\n");
+        
+        l.appendText("Id:" + this.id+"\n") ;
+        l.appendText ("Age:" + this.get_age()+"\n");
+        l.appendText  ("Salary: " + this.salary + "$\n");
+        l.appendText("-----------------------------------------------\n");
+        */
     }
+   public class notFoundException extends Exception{
+       public notFoundException(String message){
+           super(message);
+       }
+   }
 
-    public void find_person_by_name(String n)// this function display all of the persons with the given intials
+    public void find_person_by_name(String n) throws notFoundException// this function display all of the persons with the given intials
     {
-
-        if (n == null || n.isEmpty()) {
-            System.out.println("Error: Name cannot be null or empty");
-            return;
-        }
+       
+        boolean found=false;
         for (int i = 0; i < (Pharmacy.persons_count_in_pharamcy); i++) // p.person.length returns the number of persons
                                                                        // assigned in the pharmacy
         {
 
             try {
-                if (p.person[i].get_name().substring(0, n.length()).toLowerCase().equals(n.toLowerCase())
+                
+                    if (p.person[i].get_name().substring(0, n.length()).toLowerCase().equals(n.toLowerCase())
                         && (!(this.get_name().equals(p.person[i].get_name()))))// you find persons except yourslef
                 {
-                    p.person[i].display_self();
+                        p.person[i].display_self();
+                      
+                    found=true;
+                    
+                
                 }
+            
             } catch (IndexOutOfBoundsException e) {
                 // when the n.length is larger than the p.person[i].get_name()
+               
                 continue;
+                
             }
+            
 
         }
+        if(!found){throw new notFoundException("No such person was found!");}
     }
 
     public void add_item(String n, int count, LocalDate expiry, double price) {
@@ -86,19 +115,7 @@ public class Doctor extends Person implements Capabilities {
             if (type == 'l' || type == 'L') {
                 System.out.println("Please Enter The Volume Of The liquid in mg");
                 double vol = 0;// intilaization
-                while (true) // inputmismatch exception handling
-                {
-
-                    try {
-                        vol = s.nextDouble();
-                        break;
-
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid input please input a Double number");
-                        s.nextLine();
-
-                    }
-                }
+                
 
                 p.items[Pharmacy.item_count_in_pharmacy++] = new Liquid(n, count, expiry, vol, price);// polymorphism
                                                                                                       // applied :)
@@ -107,15 +124,7 @@ public class Doctor extends Person implements Capabilities {
                 System.out.println("Please Enter The Number Of Capusles in The Tabelt");
                 int number = 0;
                 // input mismatch exception handling
-                while (true) {
-                    try {
-                        number = s.nextInt();
-                        break;
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid input Please enter an integer number of capsules");
-                        s.nextLine();
-                    }
-                }
+                
 
                 p.items[Pharmacy.item_count_in_pharmacy++] = new Tablet(n, count, expiry, number, price);// polymorphism
                                                                                                          // applied :)
@@ -126,13 +135,54 @@ public class Doctor extends Person implements Capabilities {
             return;
         }
     }
-
-    public void Display_Persons() {
+//    public void add_item_waleed(String n, int count, LocalDate expiry, double price, char type){}
+    
+    
+    
+    
+    
+    public static TextArea sb = new TextArea();
+     public void Display_Persons() {
+         
+        
         for (int i = 0; i < Pharmacy.persons_count_in_pharamcy; i++) {
-            p.person[i].display_self();
+            //p.person[i].display_self();
+            if(p.person[i] instanceof Doctor){
+                Doctor doc = (Doctor)p.person[i];
+            sb.appendText("-------"+"Doctor------\n");
+            sb.appendText("Name: "+doc.get_name()+"\n");
+            sb.appendText("ID: "+doc.id+"\n");
+            sb.appendText("Age: "+doc.get_age()+"\n");
+            sb.appendText("Salary: "+doc.salary+"\n");
+            sb.appendText("\n");}
+            else if(p.person[i] instanceof Customer){
+                Customer c = (Customer)p.person[i];
+                if(c.get_gender() == 'm' || c.get_gender() == 'M'){
+                sb.appendText("-------Customer-------\n");
+                sb.appendText("Name: "+c.get_name()+"\n");
+                sb.appendText("Age: "+c.get_age()+"\n");
+                sb.appendText("Gender: Male \n");
+                sb.appendText("Balance: "+c.get_balance()+"\n");
+                sb.appendText("\n");
+                }
+                if(c.get_gender() == 'f' || c.get_gender() == 'F'){
+                sb.appendText("-------Customer-------\n");
+                sb.appendText("Name: "+c.get_name()+"\n");
+                sb.appendText("Age: "+c.get_age()+"\n");
+                sb.appendText("Gender: Female \n");
+                sb.appendText("Balance: "+c.get_balance()+"\n");
+                sb.appendText("\n");
+                }
+                
+                
+            
+            }
         }
+        
+        sb.appendText("Total number of users: "+Pharmacy.persons_count_in_pharamcy);
     }
 
+        
     // this function ensures when the count of some items is 0 to be removed from
     // the array
     private void remove_from_arr(int index) {
@@ -187,41 +237,25 @@ public class Doctor extends Person implements Capabilities {
     }
 
     // remove a certain amount of the item by giving the item name
-    public void remove_item_by_name(String n, int count_to_be_removed) {
-
-        for (int i = 0; i < Pharmacy.item_count_in_pharmacy; i++) {
+    public void remove_item_by_name(String n, int count_to_be_removed) throws removeException
+    {
+for (int i = 0; i < Pharmacy.item_count_in_pharmacy; i++) {
 
             if (p.items[i].get_name().equals(n)) {
-                while (true) {
-                    if (count_to_be_removed > p.items[i].get_count()) {
-                        System.out.println(
-                                "The count you want to remove is more than what's avilable there is only"
-                                        + p.items[i].get_count() + " so,please enter a valid number");
-
-                        while (true) {
-                            try {
-                                count_to_be_removed = s.nextInt();
-                                break;
-                            } catch (InputMismatchException e) {
-                                System.out.println("Please enter a integer amount to be removed");
-                                s.nextLine();
-                            }
-                        }
-
-                    } else if (count_to_be_removed < 0) {
-                        System.out.println("Error can't remove negative values please enter a postive value");
-                        while (true) {
-                            try {
-                                count_to_be_removed = s.nextInt();
-                                break;
-                            } catch (InputMismatchException e) {
-                                System.out.println("Please enter a integer amount to be removed");
-                                s.nextLine();
-                            }
-                        }
-                    }
-
-                    else {
+                 if (count_to_be_removed > p.items[i].get_count()){
+                 
+                 System.out.println( "The count you want to remove is more than what's avilable there is only" + p.items[i].get_count() + " so,please enter a valid number");
+                 throw new removeException("not enought items");
+                 }
+                 
+                
+                
+            
+                else if (count_to_be_removed < 0){ 
+                    System.out.println("Error can't remove negative values please enter a postive value");  
+                    throw new removeException("Invalid input");
+                    } 
+            else {
                         System.out.println(
                                 count_to_be_removed + " of " + p.items[i].get_count() + " Items Has been removed Sucessfully from "+p.items[i].get_name());
                         p.items[i].set_subtract_count(count_to_be_removed);// removed an amount of the item from the
@@ -230,15 +264,47 @@ public class Doctor extends Person implements Capabilities {
                             remove_from_arr(i);
                         return;
                     }
-                }
-            }
+                
+                
+                
             
-
         }
-        System.out.println("No such item with the name: " + n);
+
+        
+}
        
 
     }
+    
+    /*
+    public void remove_item_by_name(String n, int count_to_be_removed) throw errorException
+    {
+        for (int i = 0; i < Pharmacy.item_count_in_pharmacy; i++) {
+
+            if (p.items[i].get_name().equals(n)) {
+                System.out.println( "The count you want to remove is more than what's avilable there is only" + p.items[i].get_count() + " so,please enter a valid number");
+            }
+                else if (count_to_be_removed < 0){ 
+                    System.out.println("Error can't remove negative values please enter a postive value");  
+                    } 
+            else {
+                        System.out.println(
+                                count_to_be_removed + " of " + p.items[i].get_count() + " Items Has been removed Sucessfully from "+p.items[i].get_name());
+                        p.items[i].set_subtract_count(count_to_be_removed);// removed an amount of the item from the
+                                                                           // Pharmacy
+                        if (p.items[i].get_count() == 0)
+                            remove_from_arr(i);
+                        return;
+                    }
+                
+                
+                
+            
+        }
+    
+    
+    }
+    */
 
     // remove a certain amount of the item by giving the item id
     public void remove_item_by_id(String id, int count_to_be_removed) {
@@ -287,31 +353,32 @@ public class Doctor extends Person implements Capabilities {
         System.out.println("No such item with the Id: " + id);
     }
 
-    public Item find_item_by_name(String name) {
-        if (name == null || name.isEmpty()) {
-            System.out.println("Error: Name cannot be null or empty");
-            return null;
-        }
-
+    @Override
+     public Item find_item_by_name(String name) throws itemNotFoundException
+    {
+        boolean found=false;
         for (int i = 0; i < Pharmacy.item_count_in_pharmacy; i++) {
             if (p.items[i] != null && p.items[i].get_name() != null && p.items[i].get_name().equals(name)) {
+                found=true;
+                p.items[i].Displayinfo();
                 return p.items[i];
+                
             }
 
         }
         // if no item with this name found
+        if(!found){throw new itemNotFoundException("No such item was found");}
         return null;
+        
 
     }
 
     public Item find_item_by_id(String id) {
-        if (id == null || id.isEmpty()) {
-            System.out.println("Error: ID cannot be null or empty");
-            return null;
-        }
-
+        
         for (int i = 0; i < Pharmacy.item_count_in_pharmacy; i++) {
             if (p.items[i] != null && p.items[i].get_id() != null && p.items[i].get_id().equals(id)) {
+                
+                p.items[i].Displayinfo();
                 return p.items[i];
             }
 
@@ -351,37 +418,20 @@ public class Doctor extends Person implements Capabilities {
         }
         System.out.println("No such items with this id");
     }
+    
 
-    public void ship_item() {
+    public void ship_item() throws noItemsToShip
+    {
 
-        if (Pharmacy.orders_count_in_pharamcy <= 0 || p.orders == null)
+        if (Pharmacy.orders_count_in_pharamcy <= 0 || p.orders == null){
             System.out.println("No Items Ordered");
+        throw new noItemsToShip("No oreders yet!");}
         else {
-            for (int i = 0; i < Pharmacy.orders_count_in_pharamcy; i++) {
+            for(int i=0;i<Pharmacy.orders_count_in_pharamcy;i++){
+                if(!p.orders[i].get_order_shipped())
                 p.orders[i].display_order_info();
-            }
-            if (Pharmacy.orders_count_in_pharamcy == 1)// if there is only 1 item ordered
-            {
-                System.out.println("Are u sure u want to Sell " + (p.orders[0].get_amount_ordered()) + " of "
-                        + (p.orders[0].get_item().get_name()) + "Click 1 if yes and otherwise if  No");
-                String c = "";
-                char click;
-                while (true) {
-                    try {
-                        c = s.nextLine();
-                        click = c.charAt(0);
-                        break;
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Invalid input PLease enter 1 if yes and otherwise if no");
-                    }
-                }
-                if (click == '1') {
-                    p.orders[0].ship_order();
-                    System.out.println("Item Shipped Sucessfully");
-                } else {
-                    System.out.println("Item Shipping Cancelled");
-                }
-                this.main_menu();
+            
+            
             }
 
         }
@@ -456,11 +506,15 @@ public class Doctor extends Person implements Capabilities {
                         } catch (NullPointerException e) {
                             System.out.println("No such Item found ");
                         }
+                        catch(notFoundException e){} //added by meeeeeeee
                     } else if (x == 4) {
                         System.out.println("Please Enter The Item name u want to find ");
                         s.nextLine();
                         String temp_name = s.nextLine();
-                        Item f = find_item_by_name(temp_name);
+                        try{Item f = find_item_by_name(temp_name);}
+                        catch(itemNotFoundException e)
+                        { System.out.println("exception added by waleeeed");}
+                        Item f=null;
                         if (f != null) {
                             System.out.println("-----------------------------------------------");
                             System.out.println(
@@ -474,7 +528,7 @@ public class Doctor extends Person implements Capabilities {
                                 try {
                                     decsion = s.nextInt();
                                     break;
-                                } catch (InputMismatchException e) {
+                                } catch (InputMismatchException ee) {
                                     System.out.println("Please enter an integer from 1 to 3");
                                     s.nextLine();
                                 }
@@ -485,7 +539,7 @@ public class Doctor extends Person implements Capabilities {
                                     try {
                                         decsion = s.nextInt();
                                         break;
-                                    } catch (InputMismatchException e) {
+                                    } catch (InputMismatchException e2) {
                                         System.out.println("Please enter an integer amount to be removed");
                                         s.nextLine();
                                     }
@@ -497,7 +551,7 @@ public class Doctor extends Person implements Capabilities {
                                     try {
                                         decsion = s.nextInt();
                                         break;
-                                    } catch (InputMismatchException e) {
+                                    } catch (InputMismatchException e4) {
                                         System.out.println("Please enter an integer to be added");
                                         s.nextLine();
                                     }
@@ -521,6 +575,7 @@ public class Doctor extends Person implements Capabilities {
                         String identfication = s.nextLine();
 
                         Item f = find_item_by_id(identfication);
+                            
                         if (f != null) {
                             System.out.println(
                                     "Please Choose and Action to do with this item (Otherwise u will go back to main menu) ");
@@ -685,7 +740,8 @@ public class Doctor extends Person implements Capabilities {
                             }
 
                         }
-                        remove_item_by_name(temp_name, temp_amount);
+try{                        remove_item_by_name(temp_name, temp_amount);}
+catch(removeException e){}//added by me to remove errors
                         // item removed sucesfully message will be added in the function itself
 
                     } else if (x == 9) {
@@ -769,10 +825,13 @@ public class Doctor extends Person implements Capabilities {
         }
 
     }
+        //public static TextArea m = new TextArea();
+        
 
     void display_items() {
         if (Pharmacy.item_count_in_pharmacy == 0) {
             System.out.println("No items to be displayed ");
+            Person.getTextArea_m().appendText("no items added");
             return;
         }
 
@@ -781,10 +840,25 @@ public class Doctor extends Person implements Capabilities {
                 continue;
             if (p.items[i] instanceof Tablet) {
                 Tablet t = (Tablet) p.items[i];
-                t.Displayinfo();
+                //t.Displayinfo();
+                Person.getTextArea_m().appendText("----Tablet--------\n");
+                Person.getTextArea_m().appendText("Name:"+t.get_name()+"\n");
+                Person.getTextArea_m().appendText("Count: "+t.get_count()+"\n");
+                Person.getTextArea_m().appendText("Expires after: "+t.get_expiry_date()+"\n");
+                Person.getTextArea_m().appendText("Number of capsules: "+t.get_number_capsules()+"\n");
+                Person.getTextArea_m().appendText("Price: "+t.get_price()+"\n");
+                Person.getTextArea_m().appendText("---------------------");
+               
             } else if (p.items[i] instanceof Liquid) {
                 Liquid l = (Liquid) p.items[i];
-                l.Displayinfo();
+                //l.Displayinfo();
+                Person.getTextArea_m().appendText("----Liquid---------------\n");
+                Person.getTextArea_m().appendText("Name:"+l.get_name()+"\n");
+                Person.getTextArea_m().appendText("Count: "+l.get_count()+"\n");
+                Person.getTextArea_m().appendText("Expires after: "+l.get_expiry_date()+"\n");
+                Person.getTextArea_m().appendText("Volume: "+l.get_volume()+"\n");
+                Person.getTextArea_m().appendText("Price: "+l.get_price()+"\n");
+                Person.getTextArea_m().appendText("-----------------------------------");
             } else {
                 p.items[i].Displayinfo();
             }

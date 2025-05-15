@@ -1,5 +1,5 @@
-package main;
 
+package main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -21,23 +21,43 @@ public class Customer extends Person {
     public boolean check_pass(String password) {
         return this.password.equals(password);
     }
+    
+    public Double get_balance(){return this.Balance;}
+    
+    char get_gender(){return this.gender;}
 
     @Override
     void display_self() {
-        System.out.println("-----------------------------------------------");
-        System.out.println("Name :" + get_name());
-        System.out.println("Age :" + get_age());
+       
+        Person.get_TextArea().appendText("-----------------------------------------------\n");
+        Person.get_TextArea().appendText("Name:" + this.get_name()+"\n");
+        Person.get_TextArea().appendText ("Age:" + this.get_age()+"\n");
+       Person.get_TextArea().appendText  ("Balance: " + this.Balance + "$\n");
         if (gender == 'm' || gender == 'M')
-            System.out.println("Gender : Male");
-        else if (gender == 'f' || gender == 'F')
-            System.out.println("Gender: Female");
+        { Person.get_TextArea().appendText  ("Gender: Male\n");
+         Person.get_TextArea().appendText("-----------------------------------------------\n");}
+        else if (gender == 'f' || gender == 'F'){
+           Person.get_TextArea().appendText  ("Gender: Female\n");
+            Person.get_TextArea().appendText("-----------------------------------------------\n");}
         else
             throw new IllegalArgumentException("Must be Male or Female");
-        System.out.println("Balance  :" + Balance + "$");
-        System.out.println("-----------------------------------------------");
+        
+        
+      
+        
+        
+        
+       
+       
+        
+    }
+    public class itemBuyError extends Exception{
+        public itemBuyError(String message){
+            super(message);
+        }
     }
 
-    public void make_order(String order_owner, String name, int amount_needed) throws IllegalArgumentException {
+    public void make_order(String order_owner, String name, int amount_needed) throws IllegalArgumentException, itemBuyError {
         boolean found = false;
         System.out.println("-----------------------------------------------");
         for (int index = 0; index < Pharmacy.item_count_in_pharmacy; index++) {
@@ -46,6 +66,7 @@ public class Customer extends Person {
                 if (p.items[index].get_count() >= amount_needed) {
                     if (p.items[index].get_price() * amount_needed > Balance) {
                         System.out.println("Insfuccient Funds to Complete Process");
+                        throw new itemBuyError("Insfuccient Funds to Complete Process");
                     } else {
                         // order place and items count decreased
                         found = true;
@@ -57,29 +78,11 @@ public class Customer extends Person {
                 } else {
                     System.out.println("Insuffcient Amount Of This Item, There are only " + p.items[index].get_count() +
                             " Of It Left, So Please Ask for Diffrent Amount If ->=0 you will exit");
-                    int amount = 0;
-                    while (true) {
-                        try {
-                            amount = s.nextInt();
-                            break;
-                        } catch (InputMismatchException e) {
-                            System.out.println("Please enter an integer input of amount needed");
-                            s.nextLine();
-                        }
-                    }
+                    throw new itemBuyError("Insuffcient Amount Of This Item");
+                    
+                    
 
-                    while (true) {
-                        if (amount > 0) {
-                            make_order(order_owner, name, amount);
-                            break;
-                        } else if (amount >= 0) {
-
-                            System.out.println("Invalid input must be greater than 0");
-                            amount = s.nextInt();
-                            s.nextLine();
-                        }
-
-                    }
+                   
                 }
                 System.out.println("-----------------------------------------------");
                 return;
@@ -87,7 +90,8 @@ public class Customer extends Person {
         }
         if (!found) {
             System.out.println("No Such Item Found");
-            System.out.println("-----------------------------------------------");
+            throw new itemBuyError("No Such Item Found");
+           // System.out.println("-----------------------------------------------");
         }
     }
 
@@ -130,7 +134,7 @@ public class Customer extends Person {
                     }
                 }
                 System.out.println("-----------------------------------------------");
-                this.make_order(get_name(), temp_name, temp_amount_needed);
+              //  this.make_order(get_name(), temp_name, temp_amount_needed);
             }
 
             // tracking order

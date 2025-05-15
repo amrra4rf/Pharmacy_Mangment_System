@@ -10,7 +10,7 @@ public class Pharmacy {
     public static int item_count_in_pharmacy = 0;
     public static int persons_count_in_pharamcy = 0;
     public static int orders_count_in_pharamcy = 0;
-
+    public static int index = persons_count_in_pharamcy;
     Person[] person = new Person[length * 10]; // max number of persons to be added is 10000
     Item[] items = new Item[length * 10]; // max number of items to be added is 10000
     Order[] orders = new Order[length * 100]; // max number of orders to be made at once is 100000
@@ -73,7 +73,7 @@ public class Pharmacy {
                     break;
             }
         }
-        menu();
+       // menu();
     }
 
     public void customer_login() {
