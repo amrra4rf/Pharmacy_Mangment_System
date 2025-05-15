@@ -12,6 +12,7 @@ public class Order
   private boolean order_shipped;
   private LocalDate order_date ;
   private String  order_number ;
+  private static TextArea t = new TextArea();
 
   Order(String owner,Item it,int amount_ordered,LocalDate orderLocalDate)
   {
@@ -26,6 +27,10 @@ public class Order
   }
   //start of getters
 
+  public static TextArea get_t()
+  {
+    return t;
+  }
   public Item get_item()
   {
     return o;
@@ -52,7 +57,7 @@ public class Order
   }
 
   //end of getters
-  public static TextArea t = new TextArea();
+  
   
   public void display_order_info()
   {

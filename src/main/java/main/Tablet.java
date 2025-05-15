@@ -24,14 +24,14 @@ public class Tablet extends Item {
     public void Displayinfo()
     {
       
-        ab.appendText("------------------------------------------------------\n");
-        ab.appendText("Item name :" + this.get_name()+"\n");
-        ab.appendText("Item ID:" + this.get_id()+"\n");
-        ab.appendText("Item count:" + this.get_count()+"\n");
-        ab.appendText("Price:" + this.get_price() + "$\n");
-        ab.appendText("Expiry Date:" + get_expiry_date().toString()+"\n");
-        ab.appendText("Item number of capsules:" + number_of_capsules+"\n");
-        ab.appendText("------------------------------------------------------");
+        Item.get_text_area_ab(). appendText("------------------------------------------------------\n");
+        Item.get_text_area_ab().appendText("Item name :" + this.get_name()+"\n");
+        Item.get_text_area_ab().appendText("Item ID:" + this.get_id()+"\n");
+        Item.get_text_area_ab().appendText("Item count:" + this.get_count()+"\n");
+        Item.get_text_area_ab().appendText("Price:" + this.get_price() + "$\n");
+        Item.get_text_area_ab().appendText("Expiry Date:" + get_expiry_date().toString()+"\n");
+        Item.get_text_area_ab().appendText("Item number of capsules:" + number_of_capsules+"\n");
+        Item.get_text_area_ab().appendText("------------------------------------------------------");
         
         
     }

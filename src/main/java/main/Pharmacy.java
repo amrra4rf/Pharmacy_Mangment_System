@@ -77,7 +77,7 @@ public class Pharmacy {
     }
 
     public void customer_login() {
-        if (Customer.number_of_customers <= 0) {
+        if (Customer.get_number_of_customers() <= 0) {
             System.out.println("There is No Customers in The Pharmacy currently");
         } else {
             while (true) {

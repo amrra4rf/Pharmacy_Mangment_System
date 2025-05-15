@@ -8,7 +8,7 @@ public class Customer extends Person {
     private Double Balance;
     private char gender;
     private String password;
-    public static int number_of_customers = 0;
+    private static int number_of_customers = 0;
 
     Customer(String name, int age, char gender, double Balance, String password) {
         super(name, age);
@@ -16,6 +16,11 @@ public class Customer extends Person {
         this.Balance = Balance;
         this.password = password;
         Customer.number_of_customers++;
+    }
+
+    public static int get_number_of_customers()
+    {
+        return number_of_customers;
     }
 
     public boolean check_pass(String password) {

@@ -339,7 +339,7 @@ public class test extends Application {
             
             
            
-       pane.getChildren().add(Item.ab);
+       pane.getChildren().add(Item.get_text_area_ab());
         stage.setScene(sort_item);
         
         });
@@ -374,8 +374,8 @@ public class test extends Application {
         Scene scene = new Scene(vb,300,350);
         Pane root = new Pane();
         Scene item_found = new Scene(root,300,350);
-        root.getChildren().add(Item.ab);
-        Item.ab.setEditable(false);
+        root.getChildren().add(Item.get_text_area_ab());
+        Item.get_text_area_ab().setEditable(false);
         stage.setScene(scene);
         search.setOnAction(e->{
             try{
@@ -417,12 +417,12 @@ public class test extends Application {
         Scene item_found = new Scene(root,300,350);
         
         search.setOnAction(e->{
-            Item.ab.clear();
+            Item.get_text_area_ab().clear();
             Doctor doc = (Doctor)phar.person[phar.index];
             doc.find_item_by_id(tf.getText());
  
             stage.setScene(item_found);
-            root.getChildren().add(Item.ab);
+            root.getChildren().add(Item.get_text_area_ab());
         });
         
         stage.show();
@@ -455,7 +455,7 @@ public class test extends Application {
         stage.setTitle("Available items");
         Pane root = new Pane();
         Scene scene = new Scene(root,300,350);
-        root.getChildren().add(Item.ab);
+        root.getChildren().add(Item.get_text_area_ab());
         stage.setScene(scene);
         stage.show();
     
@@ -521,7 +521,7 @@ public class test extends Application {
         Pane root = new Pane();
         Scene scene = new Scene(root,300,350);
         stage.setScene(scene);
-        root.getChildren().add(Order.t);
+        root.getChildren().add(Order.get_t());
         stage.show();
         
     }
@@ -548,14 +548,14 @@ public class test extends Application {
         
          stage.setScene(scene);
          ComboBox<String> cb = new ComboBox<>();
-          vb.getChildren().addAll(Order.t,cb,ship);
+          vb.getChildren().addAll(Order.get_t(),cb,ship);
          for(int i=0;i<Pharmacy.orders_count_in_pharamcy;i++)
          {
              cb.getItems().add(phar.orders[i].get_order_number());
          }
-         if(Pharmacy.orders_count_in_pharamcy==0)Order.t.appendText("Nor orders yet");
+         if(Pharmacy.orders_count_in_pharamcy==0)Order.get_t().appendText("Nor orders yet");
          
-         Order.t.setEditable(false);
+         Order.get_t().setEditable(false);
          stage.show();
          ship.setOnAction(e->{
              boolean found=false;
@@ -783,7 +783,7 @@ public class test extends Application {
 
         MenuItem find_item_name = new MenuItem("Item by name");
         find_item_name.setOnAction(e->{
-            Item.ab.clear();
+            Item.get_text_area_ab().clear();
             item_find_name();
             
         
@@ -794,7 +794,7 @@ public class test extends Application {
 
         MenuItem find_item_id = new MenuItem("Item by ID");
         find_item_id.setOnAction(e->{
-            Item.ab.clear();
+            Item.get_text_area_ab().clear();
             item_find_id();
         
         
@@ -812,7 +812,7 @@ public class test extends Application {
 
         MenuItem ship = new MenuItem("Ship order");
         ship.setOnAction(e->{
-            Order.t.clear();
+            Order.get_t().clear();
             
             Doctor doc = (Doctor)phar.person[phar.index];
          try{ 
@@ -841,8 +841,8 @@ public class test extends Application {
         Menu cart = new Menu("My orders");
         MenuItem items_av = new MenuItem("Available items");
         items_av.setOnAction(e->{
-            Item.ab.clear();
-            if(Pharmacy.item_count_in_pharmacy==0)Item.ab.appendText("No items available!");
+            Item.get_text_area_ab().clear();
+            if(Pharmacy.item_count_in_pharmacy==0)Item.get_text_area_ab().appendText("No items available!");
             
             else{
      
@@ -853,7 +853,7 @@ public class test extends Application {
             
             }
         customer_items();
-        Item.ab.setEditable(false);
+        Item.get_text_area_ab().setEditable(false);
         
         });
     
@@ -864,9 +864,9 @@ public class test extends Application {
         MenuItem my_cart = new MenuItem("My cart");
         
         my_cart.setOnAction(e->{
-            Order.t.clear();
+            Order.get_t().clear();
             customer_cart_stage();
-            if(Pharmacy.orders_count_in_pharamcy==0)Order.t.appendText("No orders made yet!");
+            if(Pharmacy.orders_count_in_pharamcy==0)Order.get_t().appendText("No orders made yet!");
             else{
             for (int i = 0; i < Pharmacy.orders_count_in_pharamcy; i++) {
                     if (phar.orders[i].get_order_owner().equals(phar.person[phar.index].get_name())) {
