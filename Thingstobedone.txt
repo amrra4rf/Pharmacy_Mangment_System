@@ -3,5 +3,3 @@
 
 
 find persons by name deals with customer
-find_item_by_name RETURN NULL DEAL WITH IT IN THE CALLER+ASK CHAT IF THIS EVEN THROWS OR NOT
-same for find_item_by_id
