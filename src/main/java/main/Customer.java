@@ -18,6 +18,7 @@ public class Customer extends Person {
         Customer.number_of_customers++;
     }
 
+    //start of getters
     public static int get_number_of_customers()
     {
         return number_of_customers;
@@ -30,6 +31,7 @@ public class Customer extends Person {
     public Double get_balance(){return this.Balance;}
     
     char get_gender(){return this.gender;}
+    //end of getters
 
     @Override
     void display_self() {

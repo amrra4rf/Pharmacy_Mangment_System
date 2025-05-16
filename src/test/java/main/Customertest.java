@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 import javafx.embed.swing.JFXPanel;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
  class JFXInitializer {

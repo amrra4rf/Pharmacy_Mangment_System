@@ -26,7 +26,6 @@ public class Order
     
   }
   //start of getters
-
   public static TextArea get_t()
   {
     return t;
@@ -55,7 +54,6 @@ public class Order
   {
     return order_owner;
   }
-
   //end of getters
   
   

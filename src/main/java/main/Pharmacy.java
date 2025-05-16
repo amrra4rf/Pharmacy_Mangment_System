@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class Pharmacy {
     private Scanner s = new Scanner(System.in);
-    private final static int length = 1000;// constant
     public static int item_count_in_pharmacy = 0;
     public static int persons_count_in_pharamcy = 0;
     public static int orders_count_in_pharamcy = 0;
     public static int index = persons_count_in_pharamcy;
+    private final static int length = 1000;// constant
     Person[] person = new Person[length * 10]; // max number of persons to be added is 10000
     Item[] items = new Item[length * 10]; // max number of items to be added is 10000
     Order[] orders = new Order[length * 100]; // max number of orders to be made at once is 100000
@@ -20,7 +20,7 @@ public class Pharmacy {
     private static Pharmacy p = new Pharmacy();
 
     private Pharmacy() {
-    } // making constructor private so no one can make an instance of the pharmacy
+    } // making constructor private so  one can make an instance of the pharmacy
       // except our pre made one
 
     public static Pharmacy getInstance() {

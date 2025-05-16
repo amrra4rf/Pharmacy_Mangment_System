@@ -5,11 +5,10 @@ import javafx.scene.control.TextArea;
 public abstract class Person {
     private String name;
     private int age;
-    static private TextArea l = new TextArea();
-    static private TextArea m = new TextArea();
+    private static  TextArea l = new TextArea();
+    private static  TextArea m = new TextArea();
+    Pharmacy p;
 
-    Pharmacy p;//doesn't need to be private since there is only 1 pharmacy and it can get acessed easily form the pharamacy class
-    
     abstract void display_self();
     abstract boolean check_pass(String password);
     Person(String name, int age) 

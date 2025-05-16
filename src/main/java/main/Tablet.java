@@ -1,7 +1,5 @@
 package main;
 import java.time.LocalDate;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 
 public class Tablet extends Item {

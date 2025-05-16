@@ -7,8 +7,7 @@ public interface Capabilities {
     public void add_item(String name, int count, LocalDate expiry, double price);// done
 
     public void add_item(String name, int count, LocalDate expiry, double price, char type);// done + this method add an
-                                                                                            // item with the type being
-                                                                                            // known (Liquid or Tablet)
+                                                                                            // item with the type being                                                                                  // known (Liquid or Tablet)
 
     public void remove_item(Item removed_item, int count_to_be_removed);
 
@@ -23,7 +22,7 @@ public interface Capabilities {
 
     public void increase_amount_of_item_by_id(String id, int amount_to_be_added);// done
 
-    public void ship_item() throws noItemsToShip;
+    public void ship_item() throws noItemsToShip; // custom made Exception;
 // done
     
     public class itemNotFoundException extends Exception{
