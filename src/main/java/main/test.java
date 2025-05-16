@@ -248,9 +248,9 @@ public class test extends Application {
         Scene scene = new Scene(root,300,350);
         stage.setScene(scene);
         
-        Doctor.sb.setEditable(false);
+        Doctor.get_sb().setEditable(false);
       
-       root.getChildren().add(Doctor.sb);
+       root.getChildren().add(Doctor.get_sb());
        
         stage.show();
         
@@ -761,7 +761,7 @@ public class test extends Application {
 
         MenuItem show_users = new MenuItem("users");
         show_users.setOnAction(e -> {
-            Doctor.sb.clear();
+            Doctor.get_sb().clear();
             Doctor doc = (Doctor)phar.person[phar.index];
             doc.Display_Persons();
             users_show_stage();

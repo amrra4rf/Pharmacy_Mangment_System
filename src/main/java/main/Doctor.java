@@ -13,7 +13,7 @@ public class Doctor extends Person implements Capabilities {
     private String id;
     public static int count_of_doctors = 0;
     private double salary;
-   
+   private  static TextArea sb = new TextArea();
     
 
     Doctor(String name, int age, double salary, String password) {
@@ -26,12 +26,14 @@ public class Doctor extends Person implements Capabilities {
      
 
     // geters
+    public static TextArea get_sb()
+    {
+        return sb;
+    }
     public String get_id() {
         return id;
     }
-   
     // end of getters
-
     // checks if the password given is the doctor's pass
     public boolean check_pass(String p) {
         return password.equals(p);
@@ -141,7 +143,7 @@ public class Doctor extends Person implements Capabilities {
     
     
     
-    public static TextArea sb = new TextArea();
+    
      public void Display_Persons() {
          
         
