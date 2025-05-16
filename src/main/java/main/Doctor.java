@@ -1,4 +1,6 @@
 package main;
+
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -46,17 +48,17 @@ public class Doctor extends Person implements Capabilities {
         System.out.println("Age:" + this.get_age());
         System.out.println("Salary:" + this.salary + "$");
         System.out.println("-----------------------------------------------");
-        /* 
+       
         //TextArea l = new TextArea();
-        l.setEditable(false);
-        l.appendText("-----------------------------------------------\n");
-        l.appendText("Name: Dr/" + this.get_name()+"\n");
+        Person.get_TextArea().setEditable(false);
+        Person.get_TextArea().appendText("-----------------------------------------------\n");
+        Person.get_TextArea().appendText("Name: Dr/" + this.get_name()+"\n");
         
-        l.appendText("Id:" + this.id+"\n") ;
-        l.appendText ("Age:" + this.get_age()+"\n");
-        l.appendText  ("Salary: " + this.salary + "$\n");
-        l.appendText("-----------------------------------------------\n");
-        */
+        Person.get_TextArea().appendText("Id:" + this.id+"\n") ;
+        Person.get_TextArea().appendText ("Age:" + this.get_age()+"\n");
+        Person.get_TextArea().appendText  ("Salary: " + this.salary + "$\n");
+        Person.get_TextArea().appendText("-----------------------------------------------\n");
+        
     }
    public class notFoundException extends Exception{
        public notFoundException(String message){

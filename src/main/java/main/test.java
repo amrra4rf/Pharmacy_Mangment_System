@@ -744,16 +744,15 @@ public class test extends Application {
         MenuItem show_item = new MenuItem("Items");
        show_item.setOnAction(e->{
            Person.getTextArea_m().clear();
-           Doctor doc = (Doctor)phar.person[phar.index];
+           Doctor doc = (Doctor)phar.person[Pharmacy.index];
            doc.display_items();
-           
            item_show_stage();
        });
 
         MenuItem show_self = new MenuItem("My info");
         show_self.setOnAction(e -> {
                     Person.get_TextArea().clear();
-                    phar.person[phar.index].display_self();
+                    phar.person[Pharmacy.index].display_self();
                     doctor_show_stage();
       
                 
